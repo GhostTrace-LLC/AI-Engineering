@@ -50,14 +50,12 @@
 
 ۱. مخزن را کلون کنید:
 
-```bash
 git clone https://github.com/peeymaann/AI-Engineering.git
 cd AI-Engineering
 
 ……………
 
 ۲. وابستگی‌ها را نصب کنید:
-Bash
 
 pnpm install
 # یا
@@ -76,7 +74,6 @@ envXAI_API_KEY=your_xai_api_key_here
 ……………
 
 ۴. سرور توسعه را اجرا کنید:
-Bash
 
 pnpm dev
 # یا
