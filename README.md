@@ -39,6 +39,8 @@
 
 ## پیش‌نیازها
 
+bash
+
 - Node.js نسخه ۱۸ یا بالاتر
 - pnpm (پیشنهادی)، npm، yarn یا bun
 - برای استفاده از Ollama: نصب و اجرای [Ollama](https://ollama.com) روی سیستم محلی
@@ -56,6 +58,7 @@ cd AI-Engineering
 ……………
 
 ۲. وابستگی‌ها را نصب کنید:
+bash
 
 pnpm install
 # یا
@@ -74,6 +77,7 @@ envXAI_API_KEY=your_xai_api_key_here
 ……………
 
 ۴. سرور توسعه را اجرا کنید:
+bash
 
 pnpm dev
 # یا
