@@ -39,8 +39,6 @@
 
 ## پیش‌نیازها
 
-bash
-
 - Node.js نسخه ۱۸ یا بالاتر
 - pnpm (پیشنهادی)، npm، yarn یا bun
 - برای استفاده از Ollama: نصب و اجرای [Ollama](https://ollama.com) روی سیستم محلی
@@ -52,14 +50,14 @@ bash
 
 ۱. مخزن را کلون کنید:
 
+```bash
 git clone https://github.com/peeymaann/AI-Engineering.git
 cd AI-Engineering
-
-……………
+```
 
 ۲. وابستگی‌ها را نصب کنید:
-bash
 
+```bash
 pnpm install
 # یا
 npm install
@@ -67,18 +65,85 @@ npm install
 yarn install
 # یا
 bun install
+```
 
-……………
+۳. متغیرهای محیطی را تنظیم کنید (در صورت نیاز به Grok):
 
-۳. متغیرهای محیطی را تنظیم کنید (در صورت نیاز به API):
-فایل .env را در ریشه پروژه ایجاد کنید:
-envXAI_API_KEY=your_xai_api_key_here
+فایل `.env` را در ریشه پروژه ایجاد کنید:
 
-……………
+```env
+XAI_API_KEY=your_xai_api_key_here
+```
 
 ۴. سرور توسعه را اجرا کنید:
-bash
 
+```bash
 pnpm dev
 # یا
 npm run dev
+```
+
+برنامه در آدرس `http://localhost:3000` در دسترس خواهد بود.
+
+---
+
+## استفاده
+
+پس از اجرای برنامه:
+
+1. در بالای صفحه، ارائه‌دهنده مورد نظر را انتخاب کنید:
+   - **Ollama (محلی)**
+   - **Grok (xAI)**
+2. پیام خود را در کادر پایین بنویسید و ارسال کنید.
+3. پاسخ به‌صورت استریم‌شده نمایش داده می‌شود.
+
+---
+
+## ساختار پروژه
+
+```
+AI-Engineering/
+├── app/
+│   ├── components/
+│   │   └── AIChat.vue          # کامپوننت اصلی چت
+│   ├── pages/
+│   │   └── index.vue           # صفحه اصلی
+│   ├── plugins/
+│   └── assets/css/
+├── server/
+│   └── api/
+│       ├── chat.post.ts        # API مربوط به Ollama
+│       └── chat-grok.post.ts   # API مربوط به Grok
+├── public/
+├── nuxt.config.ts
+├── package.json
+└── README.md
+```
+
+---
+
+## اسکریپت‌های موجود
+
+| دستور              | توضیح                              |
+|--------------------|------------------------------------|
+| `pnpm dev`         | اجرای سرور توسعه                   |
+| `pnpm build`       | ساخت نسخه تولید                    |
+| `pnpm preview`     | پیش‌نمایش نسخه تولید               |
+| `pnpm generate`    | تولید سایت استاتیک                 |
+
+---
+
+## مجوز
+
+این پروژه تحت مجوز [Apache License 2.0](LICENSE) منتشر شده است.
+
+---
+
+## مشارکت و بازخورد
+
+این مخزن برای یادگیری و آزمایش ساخته شده است.  
+اگر پیشنهادی دارید یا باگی پیدا کردید، خوشحال می‌شوم از طریق Issues یا Pull Request در جریان قرار بگیرم.
+
+---
+
+ساخته‌شده با علاقه برای یادگیری مهندسی هوش مصنوعی.
