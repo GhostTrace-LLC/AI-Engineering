@@ -78,9 +78,9 @@ XAI_API_KEY=your_xai_api_key_here
 ۴. سرور توسعه را اجرا کنید:
 
 ```bash
-pnpm dev
+pnpm dev -o
 # یا
-npm run dev
+npm run dev -o
 ```
 
 برنامه در آدرس `http://localhost:3000` در دسترس خواهد بود.
