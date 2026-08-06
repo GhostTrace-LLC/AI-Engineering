@@ -37,4 +37,10 @@ export default defineNuxtConfig({
 			include: ['@ai-sdk/vue'],
 		},
 	},
+
+	runtimeConfig: {
+		supabaseUrl: '',
+		supabaseAnonKey: '',
+		supabaseServiceRoleKey: '',
+	},
 })

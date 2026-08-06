@@ -5,6 +5,7 @@ export const useChatStore = defineStore("chat", () => {
 	const apiOptions = ref([
 		{ label: "Ollama (محلی)", value: "/api/chat", icon: "i-lucide-server" },
 		{ label: "Grok (xAI)", value: "/api/chat-grok", icon: "i-lucide-sparkles" },
+		{ label: 'RAG (اسناد)', value: '/api/chat-rag', icon: 'i-lucide-file-search' },
 	]);
 
 	// تاریخچه پیام‌ها
