@@ -18,13 +18,30 @@ export default defineEventHandler(async (event) => {
 		})
 	}
 
-	// pdf-parse v2: class API, not default function export
+	const supabase = useServerSupabaseAdmin()
+	const filename = `${Date.now()}-${file.filename || 'upload.pdf'}`
+
+	// ۱) ذخیره خود فایل PDF
+	const { error: storageError } = await supabase.storage
+		.from('documents')
+		.upload(filename, file.data, {
+			contentType: 'application/pdf',
+			upsert: false,
+		})
+
+	if (storageError) {
+		throw createError({
+			statusCode: 500,
+			statusMessage: storageError.message,
+		})
+	}
+
+	// ۲) استخراج متن
 	const parser = new PDFParse({ data: file.data })
 	const parsed = await parser.getText()
 	await parser.destroy()
 
 	const text = parsed.text?.trim()
-
 	if (!text) {
 		throw createError({
 			statusCode: 400,
@@ -32,13 +49,13 @@ export default defineEventHandler(async (event) => {
 		})
 	}
 
+	// ۳) تکه‌تکه + Embedding + ذخیره در جدول
 	const chunkSize = 500
 	const chunks: string[] = []
 	for (let i = 0; i < text.length; i += chunkSize) {
 		chunks.push(text.slice(i, i + chunkSize))
 	}
 
-	const supabase = useServerSupabaseAdmin()
 	let saved = 0
 
 	for (const chunk of chunks) {
@@ -53,6 +70,7 @@ export default defineEventHandler(async (event) => {
 			metadata: {
 				source: 'pdf-upload',
 				filename: file.filename || 'unknown.pdf',
+				storage_path: filename,
 			},
 		})
 
@@ -70,5 +88,7 @@ export default defineEventHandler(async (event) => {
 		ok: true,
 		saved,
 		pages: parsed.total,
+		storage_path: filename,
 	}
+
 })

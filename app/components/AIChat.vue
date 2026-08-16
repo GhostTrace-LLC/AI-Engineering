@@ -1,10 +1,10 @@
 <template>
-	<div class="mx-auto flex h-full w-full max-w-2xl min-h-0 flex-col gap-4 p-1 sm:gap-5 sm:p-2">
+	<div class="mx-auto flex h-full min-h-0 w-full max-w-2xl flex-col gap-4 p-1 sm:gap-5 sm:p-2">
 		<!-- Header -->
 		<div
 			class="shrink-0 flex flex-col gap-4 rounded-2xl border border-default bg-elevated/50 p-4 shadow-sm sm:flex-row sm:items-center sm:justify-between">
 			<div class="text-start">
-				<h1 class="text-xl font-bold text-highlighted">
+				<h1 id="chat-heading" class="text-xl font-bold text-highlighted">
 					چت با هوش مصنوعی
 				</h1>
 				<p class="mt-1 text-sm text-muted">
@@ -18,8 +18,15 @@
 					پاک کردن
 				</UButton>
 
-				<USelect class="w-full sm:w-52" v-model="selectedApi" :items="apiOptions" value-key="value"
-					:disabled="loading"  aria-label="انتخاب مدل هوش مصنوعی"/>
+				<USelect
+					class="w-full sm:w-52"
+					v-model="selectedApi"
+					:items="apiOptions"
+					value-key="value"
+					:portal="false"
+					:disabled="loading"
+					aria-label="انتخاب مدل هوش مصنوعی"
+				/>
 			</div>
 		</div>
 
@@ -28,7 +35,13 @@
 			class="flex min-h-0 flex-1 flex-col overflow-hidden rounded-2xl border border-default bg-default shadow-md">
 
 			<!-- Messages area (single scroll container) -->
-			<div class="min-h-0 flex-1 overflow-y-auto overscroll-contain">
+			<div
+				class="min-h-0 flex-1 overflow-y-auto overscroll-contain"
+				tabindex="0"
+				role="log"
+				aria-label="گفتگو"
+				aria-live="polite"
+			>
 				<!-- Empty state -->
 				<div v-if="!messages.length"
 					class="flex h-full flex-col items-center justify-center gap-3 p-8 text-center">
@@ -43,7 +56,7 @@
 
 				<!-- Messages -->
 				<UChatMessages v-else :messages="messages" :status="status" :should-auto-scroll="true"
-					class="p-4 sm:p-5" :user="{
+					class="p-4 sm:p-5 [&>article]:last-of-type:min-h-0" :user="{
 						side: 'right',
 						variant: 'soft',
 						avatar: { icon: 'i-lucide-user' },
@@ -65,6 +78,8 @@
 			<div class="shrink-0 overflow-hidden border-t border-default bg-elevated/30 p-2">
 				<UChatPrompt
 					v-model="input"
+					name="chat-prompt"
+					autocomplete="off"
 					placeholder="پیام خود را بنویسید…"
 					:error="error"
 					variant="naked"

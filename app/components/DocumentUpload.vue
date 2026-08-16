@@ -1,12 +1,14 @@
 <template>
 	<div class="rounded-2xl border border-default bg-default p-4 shadow-sm transition-colors hover:bg-default/50">
-		<h2 class="text-base font-semibold text-highlighted">افزودن سند</h2>
+		<h2 id="docs-heading" class="text-base font-semibold text-highlighted">افزودن سند</h2>
 		<p class="mt-1 text-sm text-muted">
 			متن را وارد کنید یا یک PDF آپلود کنید تا در دانش RAG ذخیره شود.
 		</p>
 
 		<textarea
 			v-model="content"
+			name="document-content"
+			autocomplete="off"
 			rows="5"
 			class="mt-3 w-full rounded-xl border border-default bg-elevated/30 p-3 text-sm outline-none focus:border-primary"
 			placeholder="متن سند را اینجا بنویسید..."
